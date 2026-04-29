@@ -75,4 +75,4 @@ Returns a PDF report of the last `/analyze` run as a file download.
 2. **TF-IDF vectorisation** — Job description + resumes converted to vectors
 3. **Cosine similarity** — Each resume vector compared to the JD vector
 4. **Ranking** — Resumes sorted by score (highest first)
-5. **Keyword overlap** — Top shared meaningful tokens highlighted per resume
+5. **Keyword overlap** — Top shared meaningful tokens highlighted per resume  
