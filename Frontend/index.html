@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Resume Screening System</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ══════════════ SPLASH SCREEN ══════════════ -->
+    <div id="splash" class="splash-container">
+        <div class="splash-icon">📄</div>
+        <div class="splash-title">AI Resume Screening<br>System</div>
+        <div class="splash-line"></div>
+        <div class="splash-subtitle">Intelligent • Fast • Accurate</div>
+        <div class="splash-loader">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- ══════════════ MAIN APP ══════════════ -->
+    <div id="app" class="app-wrapper" style="display:none;">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>🚀 How It Works</h2>
+            <ol>
+                <li><strong>Upload</strong> one or more PDF resumes</li>
+                <li><strong>Paste</strong> the target job description</li>
+                <li>Click <strong>Analyze Resumes</strong></li>
+                <li>View ranked results &amp; matched keywords</li>
+            </ol>
+            <div class="divider"></div>
+            <h3>⚙️ Under the Hood</h3>
+            <ul>
+                <li><strong>TF-IDF</strong> vectorisation</li>
+                <li><strong>Cosine similarity</strong> scoring</li>
+                <li>Automatic stop-word removal</li>
+                <li>Keyword overlap analysis</li>
+            </ul>
+            <div class="divider"></div>
+            <p class="sidebar-footer">Built with Flask &bull; scikit-learn &bull; PyMuPDF</p>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Hero -->
+            <div class="hero-title">
+                <h1>AI Resume Screening System</h1>
+                <p>Upload resumes &bull; Paste a job description &bull; Get instant ATS rankings</p>
+            </div>
+            <div class="divider"></div>
+
+            <!-- Input Row -->
+            <div class="input-row">
+                <!-- Upload -->
+                <div class="input-card">
+                    <h3>📂 Upload Resumes</h3>
+                    <div class="drop-zone" id="dropZone">
+                        <input type="file" id="resumeFiles" accept=".pdf" multiple hidden />
+                        <div class="drop-inner" onclick="document.getElementById('resumeFiles').click()">
+                            <span class="drop-icon">📁</span>
+                            <p>Drag &amp; drop PDF files here<br><small>or click to browse</small></p>
+                        </div>
+                    </div>
+                    <div id="fileList" class="file-list"></div>
+                </div>
+
+                <!-- Job Description -->
+                <div class="input-card">
+                    <h3>📝 Job Description</h3>
+                    <textarea
+                        id="jobDescription"
+                        class="jd-textarea"
+                        placeholder="e.g. We are looking for a Python developer with experience in Django, REST APIs, SQL …"
+                    ></textarea>
+                </div>
+            </div>
+
+            <!-- Analyze Button -->
+            <div class="btn-center">
+                <button id="analyzeBtn" class="btn-primary" onclick="analyzeResumes()">
+                    Analyze Resumes
+                </button>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="loading-spinner" style="display:none;">
+                <div class="spinner"></div>
+                <p>Extracting text &amp; computing similarity …</p>
+            </div>
+
+            <!-- Error Banner -->
+            <div id="errorBanner" class="error-banner" style="display:none;"></div>
+
+            <!-- Results Section -->
+            <div id="results" style="display:none;">
+
+                <!-- Metrics -->
+                <div class="glass-card" id="metricsCard">
+                    <div class="metric-row" id="metricsRow"></div>
+                </div>
+
+                <!-- Ranked Table -->
+                <h3>🏆 Ranked Results</h3>
+                <div class="table-wrapper">
+                    <table id="resultsTable">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Resume File Name</th>
+                                <th>ATS Score (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Keywords -->
+                <h3>🔑 Matched Keywords</h3>
+                <div id="keywordsSection"></div>
+
+                <div class="divider"></div>
+
+                <!-- Download PDF -->
+                <div class="btn-center">
+                    <button class="btn-primary" id="downloadBtn" onclick="downloadPDF()">
+                        ⬇️ Download Results as PDF
+                    </button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
