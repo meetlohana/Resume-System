@@ -1,0 +1,12 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+# virtual environment
+.venv/
+# editor
+.vscode/
+# OS files
+.DS_Store
+Thumbs.db
